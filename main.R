@@ -4,8 +4,6 @@ source("convDLV_d.R")
 source("convDLV_dm!!!!.R") # remove it !!!!
 source("utils.R")
 source("dlvPath.R")
-source("plotAll.R")
-source("plotRejs.R")
 source("lnviD2.R")
 if(Sys.info()["sysname"]=="Linux")
   {library("parallel");mclapply.hack <- mclapply} else {source("mclapplyhack.R")}
@@ -38,12 +36,11 @@ ress_dm  <- lapply(dir("output","_DM_.*resALL.rda"), function(d) get(load(paste0
 
 # Converting to tables
 ress_dm <- lapply(ress_dm, totable)
-ress_dm <- lapply(ress_dm, function(r) r[,-7])
+ress_dm <- lapply(ress_dm, function(r) r[,-8])
 
 # Reformating results
 ress_d  <- lapply(ress_d, function(r) correctRes(r[,1:7]))
 ress_dm <- lapply(ress_dm, correctRes)
-
 
 # data names and pair panels
 dnames     <- gsub("d_|_D_resALL.rda","",dir("output","_D_.*resALL.rda"))
@@ -53,7 +50,7 @@ pdats      <- lapply(dnames, gen_pdat)
 pathss_DM   <- lapply(1:length(ress_dm), function(i) lapply(1:nrow(ress_dm[[i]]), function(x) dlvPath_dm(ress_dm[[i]][x,-8],pdats[[i]][,x])))
 pathss_D    <- lapply(1:length(ress_d), function(i) lapply(1:nrow(ress_d[[i]]), function(x) dlvPath_d(ress_d[[i]][x,-7],pdats[[i]][,x])))
 
-# Correcting results
+# Correcting results (Reformatting results of pairs do not change state)
 ischange  <- lapply(pathss_DM, function(paths) t(sapply(paths, function(p) {temp <- apply(p,1,sum) > 0; temp <- c(temp,temp,T,temp); return(temp)})))
 parss_dm  <- lapply(1:length(ress_dm),  function(i)  ress_dm[[i]][,-8] * ischange[[i]])
 
@@ -75,7 +72,5 @@ write.csv(rep_dm, "results/report_dm.csv")
 write.csv(rep_d , "results/report_d.csv")
 
 # Plotting all path graphs
-lapply(c(1930, 1940,1950), plotAll)
-lapply(c("G7+S&P","Europe+G7","Europe+S&P"),plotAll)
-lapply(c(1930, 1940), plotRejs)
-lapply(c("G7+S&P","Europe+G7","Europe+S&P"), plotRejs)
+source("plots_d.R")
+source("plots_dm.R")
