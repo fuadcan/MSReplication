@@ -1,10 +1,16 @@
-setwd("~/MSReplication/")
+if(Sys.info()["sysname"]=="Linux"){setwd("~/Documents/MSReplication/")} else {setwd("~/MSReplication/")}
+
 source("convDLV_d.R")
 source("convDLV_dm!!!!.R") # remove it !!!!
 source("utils.R")
 source("dlvPath.R")
 source("plotAll.R")
 source("plotRejs.R")
+source("lnviD2.R")
+if(Sys.info()["sysname"]=="Linux")
+  {library("parallel");mclapply.hack <- mclapply} else {source("mclapplyhack.R")}
+dir.create("output",showWarnings = F)
+dir.create("results",showWarnings = F)
 
 # Estimating d's for only d switching analysis
 res1930   <- convDLV_d(1930)

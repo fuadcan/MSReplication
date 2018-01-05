@@ -1,5 +1,3 @@
-# source("lnviDM2.R")
-source("mclapplyhack.R")
 library("urca")
 
 convDLV_d <- function(yearOrRegion){
@@ -48,9 +46,9 @@ convDLV_d <- function(yearOrRegion){
   
   res1 <- simplify2array(mclapply.hack(from[1]:to[1], function(n){
     cat(paste0(n,"\n"))
-    temp <- tryCatch(optim(inits, function(p) -lnviD2(p,pPanel[,n]),lower = lowerV,
-                           upper = upperV,method="L-BFGS-B"), error=function(e){NA})
-    temp <- tryCatch(c(temp$par,temp$value),error=function(e){rep(NA,7)}); return(temp)}))
+    temp <- optim(inits, function(p) -lnviD2(p,pPanel[,n]),lower = lowerV,
+                           upper = upperV,method="L-BFGS-B")
+    temp <- c(temp$par,temp$value); return(temp)}))
   
   cat(paste0("step 1 with ",to[1]-from[1]+1, " series is done\n"))
   save(res1, file=paste0("output/d_",yearOrRegion,"_D_res1.rda"))
