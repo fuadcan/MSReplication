@@ -1,0 +1,94 @@
+\documentclass{article}
+\begin{document}
+\begin{center}
+	\Large \bf Read Me 
+\end{center}
+This replication folder consists of codes and helper functions to replicate the Regime Switching Output Gap analysis. The codes can be decomposed to three steps; estimating parameters $ d,P,\mu,\sigma, etc. $, reporting descriptive statistics of the results and generating plots. All outputs are saved to disk.
+
+The codes are designed in R project version 3.42 for Windows, developed on Windows 10 64bit operating system but also adapted for Ubuntu. To run the code trouble-free, please check your R version and save the replication file to Documents folder in Windows or Ubuntu.
+\sloppy
+\begin{flushleft}
+	\large Usage
+\end{flushleft}
+Run all the commands in main.R. The file contains commands used for reading, estimating parameters, reporting and plotting results for all pairs for each data. The preliminary results are saved in Results folder as .rda files. NOTE: The tables in these files are re-formed for the paper but both shares same outline.
+
+\begin{flushleft}
+	\large Codes
+\end{flushleft}
+\begin{enumerate}
+	\item lnviD2.R: Estimates $ d $ and transition probabilities for a given series.
+
+	Inputs:
+		 \begin{itemize}
+		 	\item b: Initial set of parameters with 2 $ d $'s and 1 $ \mu $
+		 	\item w: series to be fitted MS-ARFIMA$ (0,d,0) $
+		 \end{itemize}
+		 
+	Output: Log-likelihood of the estimate
+	
+	\item lnviDM2.R: Estimates $ d $ and transition probabilities for a given series.
+
+Inputs:
+\begin{itemize}
+	\item b: Initial set of parameters with 2 $ d $'s and 2 $ \mu $'s
+	\item w: series to be fitted MS-ARFIMA$ (0,d,0) $
+\end{itemize}
+
+Output: Log-likelihood of the estimate
+	\item convDLV\_d.R: Calls lnviD2.R for all log-differentiated gap series.
+	
+		Input:
+		\begin{itemize}
+			
+			\item yearOrRegion: Name of the data (1930,1940,1950,Europe+G7,Europe+S\&P,G7+S\&P)
+
+		\end{itemize}
+		
+		Outputs: Parameter estimates for all gap series (both saved to disk and returned)
+		
+Output: Log-likelihood of the estimate
+\item convDLV\_dm.R: Calls lnviDM2.R for all log-differentiated gap series.
+
+Input:
+\begin{itemize}
+	
+	\item yearOrRegion: Name of the data (1930,1940,1950,Europe+G7,Europe+S\&P,G7+S\&P)
+	
+\end{itemize}
+
+Outputs: Parameter estimates for all gap series (both saved to disk and returned)
+	\item plot\_d.R: Calls and reformats results saved to disk, extracts the path by using dlvPath\_d under dlvPath.R file, plots paths of d estimations of pairs and overall proportions of $ d < 1 $.
+	
+	Input: No input needed.
+	
+	Output:
+	\begin{itemize}
+		\item Paths of d estimations of pairs: Saved to pairplots folder
+		\item Overall proportions of $ d < 1 $ for each dataset: Saved to rejplots folder
+	\end{itemize} 
+	
+	\item plot\_dm Calls and reformats $ d $ and $ \mu $ switching results saved to disk, extracts the path by using dlvPath\_dm under dlvPath.R file, plots paths of d estimations of pairs and overall proportions of $ d < 1 $.
+		
+	Input: No input needed.
+
+	Output:
+	\begin{itemize}
+		\item Paths of d estimations of pairs: Saved to pairplots folder
+		\item Overall proportions of $ d < 1 $ for each dataset: Saved to rejplots folder
+	\end{itemize} 
+
+
+	\item main.R: Calls all above codes. Additionally processes outputs, creates tables presented in the paper and saves into results folder.
+	Input: No input needed.
+	
+	Output:
+	\begin{itemize}
+		\item report\_d.csv
+		\item report\_dm.csv
+	\end{itemize}
+	
+\end{enumerate}
+
+
+
+\end{document}
