@@ -24,7 +24,7 @@ d_plots     <- lapply(dss, function(ds) apply(ds<1,1,mean))
 # Plots of prop(d<1) for each dataset
 for(i in 1:length(dnames)){
   pdf(paste0("rejplots/d_lt_1_",dnames[i],".pdf"))
-  plot((2010 - length(d_plots[[i]]) + 1):2010, d_plots[[i]],ylab="prop(d < 1)",xlab="year",main=dnames[i])
+  plot((2010 - length(d_plots[[i]]) + 1):2010, d_plots[[i]],ylab="proportion (d < 1)",xlab="year",main=paste0("Proportions of d < 1, ",dnames[i]))
   dev.off()
 }
 

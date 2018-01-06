@@ -1,10 +1,11 @@
-if(Sys.info()["sysname"]=="Linux"){setwd("~/Documents/MSReplication/")} else {setwd("~/MSReplication/")}
+if(Sys.info()["sysname"]=="Linux"){setwd("~/Documents/MSReplicationFiles/")} else {setwd("~/MSReplicationFiles/")}
 
 source("convDLV_d.R")
 source("convDLV_dm!!!!.R") # remove it !!!!
 source("utils.R")
 source("dlvPath.R")
 source("lnviD2.R")
+source("lnviDM2.R")
 if(Sys.info()["sysname"]=="Linux")
   {library("parallel");mclapply.hack <- mclapply} else {source("mclapplyhack.R")}
 dir.create("output",showWarnings = F)
