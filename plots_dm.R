@@ -23,7 +23,7 @@ d_plots     <- lapply(dss, function(ds) apply(ds<1,1,mean))
 
 # Plots of prop(d<1) for each dataset
 for(i in 1:length(dnames)){
-  pdf(paste0("rejplots/d_lt_1_",dnames[i],".pdf"))
+  jpeg(paste0("rejplots/d_lt_1_",dnames[i],"_DM.jpg"))
   plot((2010 - length(d_plots[[i]]) + 1):2010, d_plots[[i]],ylab="proportion (d < 1)",xlab="year",main=paste0("Proportions of d < 1, ",dnames[i]))
   dev.off()
 }
@@ -35,7 +35,7 @@ plot_specific <- function(n1,n2,datname){
   pnames   <- colnames(gen_pdat(datname))
   serind   <- which(pairname == pnames)
   ser      <- dss[[datind]][,serind]; maintext <- paste0(pnames[serind], " ", dnames[datind])
-  jpeg(paste0("pairplots/",dnames[datind],"_",pnames[serind],".jpg"))
+  jpeg(paste0("pairplots/",dnames[datind],"_",pnames[serind],"_DM.jpg"))
   plot((2010 - length(ser)+ 1):2010, ser,type="l",xlab="year",ylab="d",main=maintext)
   dev.off()
   plot((2010 - length(ser)+ 1):2010, ser,type="l",xlab="year",ylab="d",main=maintext)
