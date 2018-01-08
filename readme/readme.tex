@@ -5,7 +5,7 @@
 \end{center}
 This replication folder consists of codes and helper functions to replicate the Regime Switching Output Gap analysis. The codes can be decomposed to three steps; estimating parameters $ d,P,\mu,\sigma, etc. $, reporting descriptive statistics of the results and generating plots. All outputs are saved to disk.
 
-The codes are designed in R project version 3.42 for Windows, developed on Windows 10 64bit operating system but also adapted for Ubuntu. To run the code trouble-free, please check your R version and save the replication file to Documents folder in Windows or Ubuntu.
+The codes are designed in R project version 3.42 for Windows, developed on Windows 10 64bit operating system but also adapted for Ubuntu 16.04 LTS. To run the code trouble-free, please check your R version and save the replication file (MSReplicationFiles) to Documents folder in Windows or Ubuntu.
 \sloppy
 \begin{flushleft}
 	\large Usage
@@ -44,9 +44,9 @@ Output: Log-likelihood of the estimate
 
 		\end{itemize}
 		
-		Outputs: Parameter estimates for all gap series (both saved to disk and returned)
+		Outputs: Parameter estimates and Loglikelihoods for all gap series (both saved to "output" folder and returned to prompt)
 		
-Output: Log-likelihood of the estimate
+
 \item convDLV\_dm.R: Calls lnviDM2.R for all log-differentiated gap series.
 
 Input:
@@ -56,7 +56,7 @@ Input:
 	
 \end{itemize}
 
-Outputs: Parameter estimates for all gap series (both saved to disk and returned)
+Outputs: Parameter estimates for all gap series (both saved to "output" folder and returned to prompt)
 	\item plot\_d.R: Calls and reformats results saved to disk, extracts the path by using dlvPath\_d under dlvPath.R file, plots paths of d estimations of pairs and overall proportions of $ d < 1 $.
 	
 	Input: No input needed.
@@ -78,7 +78,7 @@ Outputs: Parameter estimates for all gap series (both saved to disk and returned
 	\end{itemize} 
 
 
-	\item main.R: Calls all above codes. Additionally processes outputs, creates tables presented in the paper and saves into results folder.
+	\item main.R: Calls all above codes. Additionally processes outputs, creates tables presented in the paper and saves into "results" folder.
 	Input: No input needed.
 	
 	Output:
